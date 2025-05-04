@@ -1,0 +1,80 @@
+<!-- TOPBAR -->
+<nav class="navbar navbar-dark bg-dark px-4">
+  <span class="navbar-brand">Admin</span>
+  <form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search for..." />
+    <button class="btn btn-outline-light" type="submit">🔍</button>
+  </form>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<div class="d-flex">
+  <!-- SIDEBAR -->
+  <div class="bg-dark text-white sidebar">
+    <ul class="nav flex-column p-3">
+      <li class="nav-item mb-2"><strong>INICIO</strong></li>
+      <li class="nav-item"><a class="nav-link text-white" routerLink="/dashboard">📊 Dashboard</a></li>
+      <li class="nav-item mt-3"><strong>INTERFACES</strong></li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-funcionarios">
+          <i class="bi bi-people-fill me-2 text-info"></i> Funcionarios
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-area">
+          <i class="bi bi-diagram-3-fill me-2 text-warning"></i> Áreas
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-equipos">
+          <i class="bi bi-hdd-network-fill me-2 text-success"></i> Equipos
+        </a>
+      </li>     
+    </ul>
+  </div>
+
+ <!-- componente de crear area -->
+ <div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="border border-3 border-primary rounded p-3 shadow-sm">
+        <h3 class="text-center mb-4 text-primary fw-bold">Crear Área</h3>
+        <div class="card">
+          <div class="card-body">
+            <form (ngSubmit)="guardarArea()" #formArea="ngForm">
+              <div class="mb-3">
+                <label class="form-label">Nombre del Área</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  name="nombre"
+                  [(ngModel)]="area.nombre"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Tipo de Área</label>
+                <select
+                  class="form-select"
+                  required
+                  name="tipo"
+                  [(ngModel)]="area.tipo"
+                >
+                  <option value="" disabled selected>Seleccione un tipo</option>
+                  <option value="Oficina">Oficina</option>
+                  <option value="Salón">Salón</option>
+                  <option value="Bodega">Bodega</option>
+                </select>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100">
+                  Guardar Área
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

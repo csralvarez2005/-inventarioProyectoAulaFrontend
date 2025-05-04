@@ -1,0 +1,84 @@
+<!-- TOPBAR -->
+<nav class="navbar navbar-dark bg-dark px-4">
+  <span class="navbar-brand">Admin</span>
+  <form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search for..." />
+    <button class="btn btn-outline-light" type="submit">🔍</button>
+  </form>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<div class="d-flex">
+  <!-- SIDEBAR -->
+  <div class="bg-dark text-white sidebar">
+    <ul class="nav flex-column p-3">
+      <li class="nav-item mb-2"><strong>INICIO</strong></li>
+      <li class="nav-item"><a class="nav-link text-white" routerLink="/dashboard">📊 Dashboard</a></li>
+      <li class="nav-item mt-3"><strong>INTERFACES</strong></li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-funcionarios">
+          <i class="bi bi-people-fill me-2 text-info"></i> Funcionarios
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-area">
+          <i class="bi bi-diagram-3-fill me-2 text-warning"></i> Áreas
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-equipos">
+          <i class="bi bi-hdd-network-fill me-2 text-success"></i> Equipos
+        </a>
+      </li>     
+    </ul>
+  </div>
+ <!-- contenido listar funcionarios -->
+ <div class="container mt-4 rounded p-4 shadow-sm">
+  <h2 class="mb-4 text-center text-primary">Lista de Funcionarios</h2>
+
+  <div class="mb-3">
+    <button class="btn btn-primary" [routerLink]="['/crear-funcionario']">
+      <i class="bi bi-plus-circle"></i> Crear Funcionario
+    </button>
+  </div>
+
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">📋 Funcionarios Registrados</h5>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-primary text-center">
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Identificación</th>
+              <th>Cargo</th>
+              <th>Email</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr *ngFor="let funcionario of funcionarios">
+              <td>{{ funcionario.nombre_funcionario }}</td>
+              <td>{{ funcionario.apellido_funcionario }}</td>
+              <td>{{ funcionario.identificacion }}</td>
+              <td>{{ funcionario.cargo }}</td>
+              <td>{{ funcionario.email }}</td>
+              <td>
+                <span 
+                  class="badge" 
+                  [ngClass]="{
+                    'bg-success': funcionario.estado === 'activo',
+                    'bg-secondary': funcionario.estado !== 'activo'
+                  }">
+                  {{ funcionario.estado }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

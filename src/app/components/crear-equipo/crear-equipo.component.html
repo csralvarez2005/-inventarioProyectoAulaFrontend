@@ -1,0 +1,256 @@
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark px-4 fixed-top">
+  <span class="navbar-brand">Admin</span>
+  <form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search for..." />
+    <button class="btn btn-outline-light" type="submit">🔍</button>
+  </form>
+</nav>
+  
+  <!-- MAIN CONTAINER -->
+  <div class="d-flex">
+    <!-- SIDEBAR -->
+    <div class="bg-dark text-white sidebar">
+      <ul class="nav flex-column p-3">
+        <li class="nav-item mb-2"><strong>INICIO</strong></li>
+        <li class="nav-item"><a class="nav-link text-white" routerLink="/dashboard">📊 Dashboard</a></li>
+        <li class="nav-item mt-3"><strong>INTERFACES</strong></li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-funcionarios">
+            <i class="bi bi-people-fill me-2 text-info"></i> Funcionarios
+          </a>
+          
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-area">
+            <i class="bi bi-diagram-3-fill me-2 text-warning"></i> Áreas
+          </a>
+          
+          <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-equipos">
+            <i class="bi bi-hdd-network-fill me-2 text-success"></i> Equipos
+          </a>
+        </li>     
+      </ul>
+    </div>
+ <!-- Contenido de crear equipo -->
+<!-- src/app/components/equipo-form/equipo-form.component.html -->
+<div class="container mt-5 pt-4">
+  <h5 class="text-center mb-4">Crear Nuevo Equipo</h5>
+  <form [formGroup]="equipoForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <!-- Información General -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center text-white bg-primary">Información General</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Nombre *</label>
+              <input type="text" formControlName="nombreEquipo" class="form-control" placeholder="Ingrese el nombre del equipo">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Tipo</label>
+              <input type="text" formControlName="tipo" class="form-control" placeholder="Tipo de equipo">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Marca</label>
+              <input type="text" formControlName="marca" class="form-control" placeholder="Marca del equipo">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Modelo</label>
+              <input type="text" formControlName="modelo" class="form-control" placeholder="Modelo del equipo">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Número de Serie</label>
+              <input type="text" formControlName="serie" class="form-control" placeholder="Número de serie">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Descripción</label>
+              <textarea formControlName="descripcion" class="form-control" rows="2" placeholder="Descripción del equipo"></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Ubicación del Equipo</label>
+              <input type="text" formControlName="ubicacionDelEquipo" class="form-control" placeholder="Ubicación física">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Utilización</label>
+              <input type="text" formControlName="utilizacion" class="form-control" placeholder="Uso del equipo">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Recibido Por</label>
+              <input type="text" formControlName="recibidoPor" class="form-control" placeholder="Nombre del receptor">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hardware -->
+    <div class="col-md-6 mt-3">
+      <div class="card">
+        <div class="card-header text-center text-white bg-primary">Hardware</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Procesador</label>
+              <input type="text" formControlName="procesador" class="form-control" placeholder="Tipo de procesador">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">RAM (GB)</label>
+              <input type="number" formControlName="memoriaRamGB" class="form-control" placeholder="Memoria RAM">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Almacenamiento (GB)</label>
+              <input type="number" formControlName="almacenamientoGB" class="form-control" placeholder="Capacidad de almacenamiento">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Tipo Almacenamiento</label>
+              <input type="text" formControlName="tipoAlmacenamiento" class="form-control" placeholder="HDD, SSD, etc.">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Tarjeta Gráfica</label>
+              <input type="text" formControlName="tarjetaGrafica" class="form-control" placeholder="Modelo de tarjeta gráfica">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Fuente de Poder (Watts)</label>
+              <input type="number" formControlName="fuentePoderWatts" class="form-control" placeholder="Potencia en Watts">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Placa Base</label>
+              <input type="text" formControlName="placaBase" class="form-control" placeholder="Modelo de placa base">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">¿Tiene Tarjeta de Red?</label>
+              <select formControlName="tieneTarjetaRed" class="form-control">
+                <option [value]="true">Sí</option>
+                <option [value]="false">No</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">¿Tiene Tarjeta de Sonido?</label>
+              <select formControlName="tieneTarjetaSonido" class="form-control">
+                <option [value]="true">Sí</option>
+                <option [value]="false">No</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Gabinete</label>
+              <input type="text" formControlName="gabinete" class="form-control" placeholder="Tipo o modelo de gabinete">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Periféricos de Entrada</label>
+              <input type="text" formControlName="perifericosEntrada" class="form-control" placeholder="Teclado, mouse, etc.">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Periféricos de Salida</label>
+              <input type="text" formControlName="perifericosSalida" class="form-control" placeholder="Monitor, impresora, etc.">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Componentes</label>
+              <textarea formControlName="componentes" class="form-control" rows="2" placeholder="Lista de componentes adicionales"></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Accesorios</label>
+              <textarea formControlName="accesorios" class="form-control" rows="2" placeholder="Accesorios incluidos"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Red / Configuración Técnica -->
+    <div class="col-md-6 mt-3">
+      <div class="card">
+        <div class="card-header text-center text-white bg-primary">Red / Configuración Técnica</div>
+        <div class="card-body">
+          <div class="row">
+            <!-- Dirección IP -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Dirección IP</label>
+              <input type="text" formControlName="direccionIP" class="form-control" placeholder="192.168.x.x">
+            </div>
+    
+            <!-- Dirección MAC -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Dirección MAC</label>
+              <input type="text" formControlName="direccionMAC" class="form-control" placeholder="00:1A:2B:3C:4D:5E">
+            </div>
+    
+            <!-- Sistema Operativo -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Sistema Operativo</label>
+              <input type="text" formControlName="sistemaOperativo" class="form-control" placeholder="Windows, Linux, etc.">
+            </div>
+    
+            <!-- Versión del SO -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Versión SO</label>
+              <input type="text" formControlName="versionSO" class="form-control" placeholder="Versión del sistema operativo">
+            </div>
+    
+            <!-- Drivers Instalados -->
+            <div class="col-md-12 mb-3">
+              <label class="form-label">Drivers Instalados</label>
+              <textarea formControlName="driversInstalados" class="form-control" rows="2" placeholder="Lista de drivers instalados"></textarea>
+            </div>
+    
+            <!-- Programas Instalados -->
+            <div class="col-md-12 mb-3">
+              <label class="form-label">Programas Instalados</label>
+              <textarea formControlName="programasInstalados" class="form-control" rows="2" placeholder="Lista de programas instalados"></textarea>
+            </div>
+    
+            <!-- Utilidades del Sistema -->
+            <div class="col-md-12 mb-3">
+              <label class="form-label">Utilidades del Sistema</label>
+              <textarea formControlName="utilidadesSistema" class="form-control" rows="2" placeholder="Utilidades adicionales instaladas"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información de Compra y Garantía -->
+    <div class="col-md-6 mt-3">
+      <div class="card">
+        <div class="card-header text-center text-white bg-primary">Información de Compra y Garantía</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Precio</label>
+              <input type="text" formControlName="precio" class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Fecha de Compra</label>
+              <input type="date" formControlName="fechaDeCompra" class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Proveedor</label>
+              <input type="text" formControlName="proveedor" class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Garantía</label>
+              <input type="text" formControlName="garantia" class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Fecha Fin Garantía</label>
+              <input type="date" formControlName="fechaFinGarantia" class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Orden de Compra</label>
+              <input type="text" formControlName="ordenDeCompra" class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Factura</label>
+              <input type="text" formControlName="factura" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="col-md-12 d-flex justify-content-center mt-3">
+      <button class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
+</form>
+</div>

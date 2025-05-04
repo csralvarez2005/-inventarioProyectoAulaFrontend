@@ -1,0 +1,44 @@
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    height: calc(100vh - 56px); /* altura del navbar */
+    position: sticky;
+    top: 56px;
+    background-color: #1f2d3d; /* color de fondo oscuro opcional */
+    padding: 1rem;
+  }
+  
+  /* Efecto zoom en los links del sidebar */
+  .sidebar .nav-link {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out, background-color 0.2s;
+  }
+  
+  .sidebar .nav-link:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+  .card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    
+    .card-header {
+      background-color: #f8f9fa;
+    }
+  }
+  
+  .form-label {
+    font-weight: 500;
+  }
+  
+  .invalid-feedback {
+    font-size: 80%;
+  }
+  
+  textarea {
+    resize: vertical;
+  }

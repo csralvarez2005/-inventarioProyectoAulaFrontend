@@ -1,0 +1,99 @@
+<!-- TOPBAR -->
+<nav class="navbar navbar-dark bg-dark px-4">
+  <span class="navbar-brand">Admin</span>
+  <form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search for..." />
+    <button class="btn btn-outline-light" type="submit">🔍</button>
+  </form>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<div class="d-flex">
+  <!-- SIDEBAR -->
+  <div class="bg-dark text-white sidebar">
+    <ul class="nav flex-column p-3">
+      <li class="nav-item mb-2"><strong>INICIO</strong></li>
+      <li class="nav-item"><a class="nav-link text-white" routerLink="/dashboard">📊 Dashboard</a></li>
+      <li class="nav-item mt-3"><strong>INTERFACES</strong></li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-funcionarios">
+          <i class="bi bi-people-fill me-2 text-info"></i> Funcionarios
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-area">
+          <i class="bi bi-diagram-3-fill me-2 text-warning"></i> Áreas
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-equipos">
+          <i class="bi bi-hdd-network-fill me-2 text-success"></i> Equipos
+        </a>
+      </li>     
+    </ul>
+  </div>
+
+<!-- contenido de listar equipos -->
+<div class="container mt-4 rounded p-4 shadow-sm">
+  <h2 class="text-primary">📦 Inventario de Equipos</h2>
+
+  <div class="mb-3">
+    <a routerLink="/crear-equipo" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Nuevo Equipo
+    </a>
+  </div>
+
+  <div *ngIf="loading" class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+    <button type="button" class="btn-close float-end" (click)="error = null"></button>
+  </div>
+
+  <div *ngIf="!loading && equipos.length === 0" class="alert alert-info">
+    No hay equipos registrados en el sistema.
+  </div>
+
+  <div *ngIf="!loading && equipos.length > 0" class="table-responsive">
+    <table class="table table-bordered border-primary table-hover">
+      <thead class="table-primary text-center">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Serie</th>
+          <th>Tipo</th>
+          <th>Ubicación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngFor="let equipo of equipos">
+          <td>{{ equipo.id }}</td>
+          <td>{{ equipo.nombreEquipo}}</td>
+          <td>{{ equipo.marca }}</td>
+          <td>{{ equipo.modelo }}</td>
+          <td>{{ equipo.serie }}</td>
+          <td>{{ equipo.tipo }}</td>
+          <td>{{ equipo.ubicacionDelEquipo }}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <a [routerLink]="['/equipos', equipo.id, 'ver']" class="btn btn-sm btn-info me-1">
+                <i class="bi bi-eye"></i>
+              </a>
+              <a [routerLink]="['/equipos', equipo.id, 'editar']" class="btn btn-sm btn-warning me-1">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <button (click)="eliminarEquipo(equipo.id!)" class="btn btn-sm btn-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

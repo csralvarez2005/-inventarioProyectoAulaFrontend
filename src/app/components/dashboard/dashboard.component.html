@@ -1,0 +1,60 @@
+<!-- TOPBAR -->
+<nav class="navbar navbar-dark bg-dark px-4">
+  <span class="navbar-brand">Admin</span>
+  <form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search for..." />
+    <button class="btn btn-outline-light" type="submit">🔍</button>
+  </form>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<div class="d-flex">
+  <!-- SIDEBAR -->
+  <div class="bg-dark text-white sidebar">
+    <ul class="nav flex-column p-3">
+      <li class="nav-item mb-2"><strong>INICIO</strong></li>
+      <li class="nav-item"><a class="nav-link text-white" routerLink="/dashboard">📊 Dashboard</a></li>
+      <li class="nav-item mt-3"><strong>INTERFACES</strong></li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-funcionarios">
+          <i class="bi bi-people-fill me-2 text-info"></i> Funcionarios
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-area">
+          <i class="bi bi-diagram-3-fill me-2 text-warning"></i> Áreas
+        </a>
+        
+        <a class="nav-link text-white d-flex align-items-center" routerLink="/listar-equipos">
+          <i class="bi bi-hdd-network-fill me-2 text-success"></i> Equipos
+        </a>
+      </li>     
+    </ul>
+  </div>
+  <!-- DASHBOARD CONTENT -->
+  <div class="p-4 flex-grow-1">
+    <h2>Dashboard</h2>
+    <div class="row mb-4">
+      <div class="col-md-3"><div class="card bg-primary text-white"><div class="card-body">Primary Card</div></div></div>
+      <div class="col-md-3"><div class="card bg-warning text-dark"><div class="card-body">Warning Card</div></div></div>
+      <div class="col-md-3"><div class="card bg-success text-white"><div class="card-body">Success Card</div></div></div>
+      <div class="col-md-3"><div class="card bg-danger text-white"><div class="card-body">Danger Card</div></div></div>
+    </div>
+
+    <!-- Placeholders for Charts -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header">📉 Area Chart Example</div>
+          <div class="card-body"><canvas id="areaChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header">📊 Bar Chart Example</div>
+          <div class="card-body"><canvas id="barChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
