@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Equipo } from 'src/app/models/equipo.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { EquipoService } from 'src/app/services/equipo.service';
 
 @Component({
@@ -15,12 +16,14 @@ export class CrearEquipoComponent implements OnInit{
   submitted = false;
   errorMessage: string | null = null;
   equipoId?: number;
+   nombreFuncionarioActual: string = '';
 
   constructor(
     private fb: FormBuilder,
     private equipoService: EquipoService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.equipoForm = this.createForm();
   }
@@ -32,6 +35,7 @@ export class CrearEquipoComponent implements OnInit{
     if (this.isEditing) {
       this.loadEquipo(this.equipoId!);
     }
+    this.obtenerFuncionarioActual();
   }
 
   createForm(): FormGroup {
@@ -176,5 +180,17 @@ export class CrearEquipoComponent implements OnInit{
 
   onCancel(): void {
     this.router.navigate(['/equipos']);
+  }
+   obtenerFuncionarioActual(): void {
+    this.authService.funcionario$.subscribe({
+      next: (funcionario) => {
+        if (funcionario) {
+          this.nombreFuncionarioActual = funcionario.nombre_funcionario || funcionario.nombre_funcionario || '';
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener funcionario actual:', err);
+      }
+    });
   }
 }

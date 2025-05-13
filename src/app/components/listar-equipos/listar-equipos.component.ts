@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Equipo } from 'src/app/models/equipo.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { EquipoService } from 'src/app/services/equipo.service';
 
 @Component({
@@ -12,11 +13,13 @@ export class ListarEquiposComponent implements OnInit{
   equipos: Equipo[] = [];
   loading = false;
   error: string | null = null;
+  nombreFuncionarioActual: string = '';
 
-  constructor(private equipoService: EquipoService) { }
+  constructor(private equipoService: EquipoService,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.cargarEquipos();
+     this.obtenerFuncionarioActual();
   }
 
   cargarEquipos(): void {
@@ -50,5 +53,18 @@ export class ListarEquiposComponent implements OnInit{
           }
         });
     }
+  }
+
+  obtenerFuncionarioActual(): void {
+    this.authService.funcionario$.subscribe({
+      next: (funcionario) => {
+        if (funcionario) {
+          this.nombreFuncionarioActual = funcionario.nombre_funcionario || funcionario.nombre_funcionario || '';
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener funcionario actual:', err);
+      }
+    });
   }
 }

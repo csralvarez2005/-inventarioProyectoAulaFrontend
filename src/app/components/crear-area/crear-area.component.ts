@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Area } from 'src/app/models/area.model';
 import { AreaService } from 'src/app/services/area.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-crear-area',
@@ -13,8 +14,8 @@ export class CrearAreaComponent {
     nombre: '',
     tipo: '',
   };
-
-  constructor(private areaService: AreaService, private router: Router) {}
+  nombreFuncionarioActual: string = '';
+  constructor(private areaService: AreaService, private router: Router,private authService: AuthService) {}
 
   guardarArea(): void {
     this.areaService.crearArea(this.area).subscribe({
@@ -25,6 +26,24 @@ export class CrearAreaComponent {
       error: (error) => {
         console.error('Error al crear área:', error);
         alert('Error al crear el área');
+      }
+    });
+  }
+
+  ngOnInit(): void {    
+     this.obtenerFuncionarioActual();
+  }
+
+  
+  obtenerFuncionarioActual(): void {
+    this.authService.funcionario$.subscribe({
+      next: (funcionario) => {
+        if (funcionario) {
+          this.nombreFuncionarioActual = funcionario.nombre_funcionario || funcionario.nombre_funcionario || '';
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener funcionario actual:', err);
       }
     });
   }

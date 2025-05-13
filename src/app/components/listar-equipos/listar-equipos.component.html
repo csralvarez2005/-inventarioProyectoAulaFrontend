@@ -1,11 +1,13 @@
 <!-- TOPBAR -->
-<nav class="navbar navbar-dark bg-dark px-4">
-  <span class="navbar-brand">Admin</span>
-  <form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search for..." />
-    <button class="btn btn-outline-light" type="submit">🔍</button>
-  </form>
-</nav>
+<nav class="navbar navbar-dark bg-dark px-4"> 
+  <div class="d-flex align-items-center">    
+    <span class="text-light ms-3" *ngIf="nombreFuncionarioActual">¡Bienvenido, {{nombreFuncionarioActual}}!</span>
+  </div>
+  <form class="d-flex"> 
+    <input class="form-control me-2" type="search" placeholder="Search for..." /> 
+    <button class="btn btn-outline-light" type="submit">🔍</button> 
+  </form> 
+</nav> 
 
 <!-- MAIN CONTAINER -->
 <div class="d-flex">

@@ -1,10 +1,12 @@
 <!-- TOPBAR -->
-<nav class="navbar navbar-dark bg-dark px-4">
-  <span class="navbar-brand">Admin</span>
-  <form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search for..." />
-    <button class="btn btn-outline-light" type="submit">🔍</button>
-  </form>
+<nav class="navbar navbar-dark bg-dark px-4 sticky-top">
+  <div class="d-flex align-items-center">    
+    <span class="text-light ms-3" *ngIf="nombreFuncionarioActual">¡Bienvenido, {{nombreFuncionarioActual}}!</span>
+  </div>
+  <form class="d-flex"> 
+    <input class="form-control me-2" type="search" placeholder="Search for..." /> 
+    <button class="btn btn-outline-light" type="submit">🔍</button> 
+  </form> 
 </nav>
 
 <!-- MAIN CONTAINER -->
@@ -47,8 +49,7 @@
                   class="form-control"
                   required
                   name="nombre"
-                  [(ngModel)]="area.nombre"
-                />
+                  [(ngModel)]="area.nombre"/>
               </div>
 
               <div class="mb-3">
@@ -57,8 +58,7 @@
                   class="form-select"
                   required
                   name="tipo"
-                  [(ngModel)]="area.tipo"
-                >
+                  [(ngModel)]="area.tipo">
                   <option value="" disabled selected>Seleccione un tipo</option>
                   <option value="Oficina">Oficina</option>
                   <option value="Salón">Salón</option>

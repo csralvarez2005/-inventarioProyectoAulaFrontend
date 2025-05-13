@@ -1,22 +1,19 @@
-export enum Rol {
-  ADMIN = 'ADMIN',
-  USUARIO = 'USUARIO'
-}
+import { Rol } from './funcionario.model';
 
-export interface Funcionario {
-  id: number;
+export interface FuncionarioDTO {
   tipo_documento: string;
   apellido_funcionario: string;
   cargo: string;
   celular: string;
   direccion: string;
   email: string;
-  estado: string;
+  estado?: string;
   estado_civil: string;
   fecha_nacimiento: Date;
   genero: string;
   identificacion: string;
   nombre_funcionario: string;
-  rol: Rol;
+  password?: string;
+  rol: string;
   imagen_url?: string;
 }

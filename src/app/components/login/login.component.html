@@ -1,0 +1,50 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="text-center mb-4">Iniciar Sesión</h2>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="mb-3">
+        <label for="identificacion" class="form-label">Identificación</label>
+        <input 
+          type="text" 
+          id="identificacion" 
+          formControlName="identificacion" 
+          class="form-control"
+          placeholder="Ingrese su identificación"
+          [ngClass]="{'is-invalid': loginForm.get('identificacion')?.invalid && loginForm.get('identificacion')?.touched}"
+        >
+        <div *ngIf="loginForm.get('identificacion')?.invalid && loginForm.get('identificacion')?.touched" class="invalid-feedback">
+          La identificación es requerida
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          class="form-control"
+          placeholder="Ingrese su contraseña"
+          [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}"
+        >
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
+          La contraseña es requerida
+        </div>
+      </div>
+      
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+      
+      <button 
+        type="submit" 
+        class="btn btn-primary w-100" 
+        [disabled]="loginForm.invalid || loading"
+      >
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Iniciar Sesión
+      </button>
+    </form>
+  </div>
+</div>

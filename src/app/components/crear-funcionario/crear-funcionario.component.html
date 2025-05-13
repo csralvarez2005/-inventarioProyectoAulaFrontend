@@ -1,10 +1,12 @@
 <!-- TOPBAR -->
-<nav class="navbar navbar-dark bg-dark px-4">
-  <span class="navbar-brand">Admin</span>
-  <form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search for..." />
-    <button class="btn btn-outline-light" type="submit">🔍</button>
-  </form>
+<nav class="navbar navbar-dark bg-dark px-4 sticky-top">
+  <div class="d-flex align-items-center">    
+    <span class="text-light ms-3" *ngIf="nombreFuncionarioActual">¡Bienvenido, {{nombreFuncionarioActual}}!</span>
+  </div>
+  <form class="d-flex"> 
+    <input class="form-control me-2" type="search" placeholder="Search for..." /> 
+    <button class="btn btn-outline-light" type="submit">🔍</button> 
+  </form> 
 </nav>
 
 <!-- MAIN CONTAINER -->
@@ -31,129 +33,165 @@
     </ul>
   </div>
 
+  <!-- FORMULARIO -->
+  <div class="container mt-4"> 
+    <div class="card"> 
+      <div class="card-header bg-primary text-white"> 
+        <h4 class="mb-0">Crear Funcionario</h4> 
+      </div> 
+      <div class="card-body"> 
+        <form [formGroup]="funcionarioForm" (ngSubmit)="crearFuncionario()"> 
 
+          <!-- Fila con tipo documento, ID y nombre -->
+          <div class="row mb-3"> 
+            <div class="col-md-4"> 
+              <label for="tipo_documento" class="form-label">Tipo de Documento</label> 
+              <select class="form-select" id="tipo_documento" formControlName="tipo_documento"> 
+                <option value="" disabled selected>Seleccione una opción</option> 
+                <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option> 
+                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option> 
+                <option value="Cédula de Extranjería">Cédula de Extranjería</option> 
+                <option value="Pasaporte">Pasaporte</option> 
+                <option value="NIT">NIT</option> 
+                <option value="Registro Civil">Registro Civil</option> 
+              </select> 
+            </div> 
+            <div class="col-md-4"> 
+              <label for="identificacion" class="form-label">Identificación</label> 
+              <input type="text" class="form-control" id="identificacion" formControlName="identificacion"> 
+            </div> 
+            <div class="col-md-4"> 
+              <label for="nombre" class="form-label">Nombre</label> 
+              <input type="text" class="form-control" id="nombre" formControlName="nombre_funcionario"> 
+            </div> 
+          </div> 
 
-  <div class="container mt-4">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h4 class="mb-0">Crear Funcionario</h4>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="funcionarioForm" (ngSubmit)="crearFuncionario()">
-          
-          <!-- Fila con 3 campos -->
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <label for="tipo_documento" class="form-label">Tipo de Documento</label>
-              <select class="form-select" id="tipo_documento" formControlName="tipo_documento">
-                <option value="" disabled selected>Seleccione una opción</option>
-                <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
-                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
-                <option value="Cédula de Extranjería">Cédula de Extranjería</option>
-                <option value="Pasaporte">Pasaporte</option>
-                <option value="NIT">NIT</option>
-                <option value="Registro Civil">Registro Civil</option>
-              </select>
+          <!-- Fila con apellido, cargo, celular -->
+          <div class="row mb-3"> 
+            <div class="col-md-4"> 
+              <label for="apellido" class="form-label">Apellido</label> 
+              <input type="text" class="form-control" id="apellido" formControlName="apellido_funcionario"> 
+            </div> 
+            <div class="col-md-4"> 
+              <label for="cargo" class="form-label">Cargo</label> 
+              <input type="text" class="form-control" id="cargo" formControlName="cargo"> 
+            </div> 
+            <div class="col-md-4"> 
+              <label for="celular" class="form-label">Celular</label> 
+              <input type="text" class="form-control" id="celular" formControlName="celular"> 
+            </div> 
+          </div> 
+
+          <!-- Fila con dirección, correo, estado civil -->
+          <div class="row mb-3"> 
+            <div class="col-md-4"> 
+              <label for="direccion" class="form-label">Dirección</label> 
+              <input type="text" class="form-control" id="direccion" formControlName="direccion"> 
+            </div> 
+            <div class="col-md-4"> 
+              <label for="email" class="form-label">Correo</label> 
+              <input type="email" class="form-control" id="email" formControlName="email"> 
+            </div> 
+            <div class="col-md-4"> 
+              <label for="estado_civil" class="form-label">Estado Civil</label> 
+              <select class="form-select" id="estado_civil" formControlName="estado_civil"> 
+                <option value="" disabled selected>Seleccione una opción</option> 
+                <option value="Soltero">Soltero</option> 
+                <option value="Casado">Casado</option> 
+                <option value="Unión Libre">Unión Libre</option> 
+                <option value="Divorciado">Divorciado</option> 
+                <option value="Viudo">Viudo</option> 
+              </select> 
+            </div> 
+          </div> 
+
+          <!-- Fila con fecha nacimiento, género y foto -->
+          <div class="row mb-3"> 
+            <div class="col-md-4"> 
+              <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label> 
+              <div class="input-group"> 
+                <span class="input-group-text bg-light"><i class="bi bi-calendar-event"></i></span> 
+                <input 
+                  type="date" 
+                  class="form-control custom-date-input" 
+                  id="fecha_nacimiento" 
+                  formControlName="fecha_nacimiento" 
+                /> 
+              </div> 
+            </div> 
+            <div class="col-md-4"> 
+              <label class="form-label d-block">Género</label> 
+              <div class="form-check form-check-inline"> 
+                <input 
+                  class="form-check-input" 
+                  type="radio" 
+                  id="generoHombre" 
+                  value="Hombre" 
+                  formControlName="genero" 
+                /> 
+                <label class="form-check-label" for="generoHombre">Hombre</label> 
+              </div> 
+              <div class="form-check form-check-inline"> 
+                <input 
+                  class="form-check-input" 
+                  type="radio" 
+                  id="generoMujer" 
+                  value="Mujer" 
+                  formControlName="genero" 
+                /> 
+                <label class="form-check-label" for="generoMujer">Mujer</label> 
+              </div> 
             </div>
             <div class="col-md-4">
-              <label for="identificacion" class="form-label">Identificación</label>
-              <input type="text" class="form-control" id="identificacion" formControlName="identificacion">
-            </div>
-            <div class="col-md-4">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" formControlName="nombre_funcionario">
-            </div>
-          </div>
-  
-          <!-- Otra fila con 3 campos -->
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <label for="apellido" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="apellido" formControlName="apellido_funcionario">
-            </div>
-            <div class="col-md-4">
-              <label for="cargo" class="form-label">Cargo</label>
-              <input type="text" class="form-control" id="cargo" formControlName="cargo">
-            </div>
-            <div class="col-md-4">
-              <label for="celular" class="form-label">Celular</label>
-              <input type="text" class="form-control" id="celular" formControlName="celular">
-            </div>
-          </div>
-  
-          <!-- Otra fila con 3 campos -->
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <label for="direccion" class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="direccion" formControlName="direccion">
-            </div>
-            <div class="col-md-4">
-              <label for="email" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="email" formControlName="email">
-            </div>
-            <div class="col-md-4">
-              <label for="estado_civil" class="form-label">Estado Civil</label>
-              <select class="form-select" id="estado_civil" formControlName="estado_civil">
-                <option value="" disabled selected>Seleccione una opción</option>
-                <option value="Soltero">Soltero</option>
-                <option value="Casado">Casado</option>
-                <option value="Unión Libre">Unión Libre</option>
-                <option value="Divorciado">Divorciado</option>
-                <option value="Viudo">Viudo</option>
-              </select>
-            </div>
-          </div>
-  
-          <!-- Última fila con 2 campos -->
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
-              <div class="input-group">
-                <span class="input-group-text bg-light"><i class="bi bi-calendar-event"></i></span>
-                <input
-                  type="date"
-                  class="form-control custom-date-input"
-                  id="fecha_nacimiento"
-                  formControlName="fecha_nacimiento"
-                />
+              <label for="imagen" class="form-label">Foto del Funcionario</label>
+              <input 
+                type="file" 
+                class="form-control" 
+                id="imagen" 
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              >
+              <div *ngIf="imagenPreview" class="mt-2">
+                <img [src]="imagenPreview" class="img-thumbnail" style="max-height: 150px;">
               </div>
             </div>
-            <div class="col-md-4">
-              <label class="form-label d-block">Género</label>
-              <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  id="generoHombre"
-                  value="Hombre"
-                  formControlName="genero"
-                />
-                <label class="form-check-label" for="generoHombre">Hombre</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  id="generoMujer"
-                  value="Mujer"
-                  formControlName="genero"
-                />
-                <label class="form-check-label" for="generoMujer">Mujer</label>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Botón -->
-          <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-success" [disabled]="funcionarioForm.invalid">
-              <i class="bi bi-check-circle"></i> Crear Funcionario
-            </button>
-          </div>
-        </form>
-  
-        <div *ngIf="mensaje" class="alert alert-info mt-3">
-          {{ mensaje }}
-        </div>
-      </div>
-    </div>
+          </div> 
+
+          <!-- Fila con contraseña -->
+        <!-- Fila con contraseña y rol -->
+<div class="row mb-3">
+  <div class="col-md-4">
+    <label for="password" class="form-label">Contraseña</label>
+    <input 
+      type="password" 
+      class="form-control" 
+      id="password" 
+      formControlName="password"
+      placeholder="Ingrese una contraseña"
+    >
   </div>
+  <div class="col-md-4">
+    <label for="rol" class="form-label">Rol</label>
+    <select class="form-select" id="rol" formControlName="rol" required>
+      <option value="" disabled selected>Seleccione un rol</option>
+      <option value="ADMIN">ADMIN</option>
+      <option value="USER">USER</option>
+    </select>
+  </div>
+</div>
+
+          <!-- Botón --> 
+          <div class="d-flex justify-content-end"> 
+            <button type="submit" class="btn btn-success" [disabled]="funcionarioForm.invalid"> 
+              <i class="bi bi-check-circle"></i> Crear Funcionario 
+            </button> 
+          </div> 
+        </form> 
+
+        <div *ngIf="mensaje" class="alert alert-info mt-3"> 
+          {{ mensaje }} 
+        </div> 
+      </div> 
+    </div> 
+  </div>
+</div>

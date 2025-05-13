@@ -1,10 +1,12 @@
-<!-- TOPBAR -->
-<nav class="navbar navbar-dark bg-dark px-4">
-  <span class="navbar-brand">Admin</span>
-  <form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search for..." />
-    <button class="btn btn-outline-light" type="submit">🔍</button>
-  </form>
+<!-- TOPBAR --> 
+<nav class="navbar navbar-dark bg-dark px-4 sticky-top">
+  <div class="d-flex align-items-center">    
+    <span class="text-light ms-3" *ngIf="nombreFuncionario">¡Bienvenido, {{nombreFuncionario}}!</span>
+  </div>
+  <form class="d-flex"> 
+    <input class="form-control me-2" type="search" placeholder="Search for..." /> 
+    <button class="btn btn-outline-light" type="submit">🔍</button> 
+  </form> 
 </nav>
 
 <!-- MAIN CONTAINER -->
@@ -32,27 +34,134 @@
   </div>
   <!-- DASHBOARD CONTENT -->
   <div class="p-4 flex-grow-1">
-    <h2>Dashboard</h2>
-    <div class="row mb-4">
-      <div class="col-md-3"><div class="card bg-primary text-white"><div class="card-body">Primary Card</div></div></div>
-      <div class="col-md-3"><div class="card bg-warning text-dark"><div class="card-body">Warning Card</div></div></div>
-      <div class="col-md-3"><div class="card bg-success text-white"><div class="card-body">Success Card</div></div></div>
-      <div class="col-md-3"><div class="card bg-danger text-white"><div class="card-body">Danger Card</div></div></div>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Dashboard</h2>
+    <div *ngIf="nombreFuncionario" class="alert alert-info py-2 px-3 mb-0">
+      <i class="bi bi-person-circle me-2"></i> Bienvenido, {{nombreFuncionario}}
     </div>
+  </div>
 
-    <!-- Placeholders for Charts -->
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card mb-4">
-          <div class="card-header">📉 Area Chart Example</div>
-          <div class="card-body"><canvas id="areaChart"></canvas></div>
+  <!-- Cards de resumen -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3 mb-md-0">
+      <div class="card shadow-sm border-0 h-100 rounded-3 bg-primary bg-gradient text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title fw-bold">Funcionarios</h5>
+              <h3 class="mb-0">24</h3>
+            </div>
+            <div class="rounded-circle bg-white bg-opacity-25 p-3">
+              <i class="bi bi-people-fill fs-3"></i>
+            </div>
+          </div>
+          <div class="mt-3 small">
+            <span class="text-white-50">Total registrados</span>
+          </div>
         </div>
       </div>
+    </div>
+    
+    <div class="col-md-3 mb-3 mb-md-0">
+      <div class="card shadow-sm border-0 h-100 rounded-3 bg-warning bg-gradient text-dark">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title fw-bold">Áreas</h5>
+              <h3 class="mb-0">8</h3>
+            </div>
+            <div class="rounded-circle bg-dark bg-opacity-10 p-3">
+              <i class="bi bi-diagram-3-fill fs-3"></i>
+            </div>
+          </div>
+          <div class="mt-3 small">
+            <span class="text-dark text-opacity-75">Departamentos activos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3 mb-3 mb-md-0">
+      <div class="card shadow-sm border-0 h-100 rounded-3 bg-success bg-gradient text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title fw-bold">Equipos</h5>
+              <h3 class="mb-0">42</h3>
+            </div>
+            <div class="rounded-circle bg-white bg-opacity-25 p-3">
+              <i class="bi bi-hdd-network-fill fs-3"></i>
+            </div>
+          </div>
+          <div class="mt-3 small">
+            <span class="text-white-50">Dispositivos registrados</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3 mb-3 mb-md-0">
+      <div class="card shadow-sm border-0 h-100 rounded-3 bg-danger bg-gradient text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title fw-bold">Alertas</h5>
+              <h3 class="mb-0">5</h3>
+            </div>
+            <div class="rounded-circle bg-white bg-opacity-25 p-3">
+              <i class="bi bi-exclamation-triangle-fill fs-3"></i>
+            </div>
+          </div>
+          <div class="mt-3 small">
+            <span class="text-white-50">Requieren atención</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <div class="col-md-6">
-        <div class="card mb-4">
-          <div class="card-header">📊 Bar Chart Example</div>
-          <div class="card-body"><canvas id="barChart"></canvas></div>
+  <!-- Placeholders for Charts --> 
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-header bg-white border-0 py-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">📉 Equipos por Área</h5>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="areaChartDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="areaChartDropdown">
+                <li><a class="dropdown-item" href="#">Ver detalles</a></li>
+                <li><a class="dropdown-item" href="#">Exportar datos</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <canvas id="areaChart" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-header bg-white border-0 py-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">📊 Equipos por Tipo</h5>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="barChartDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="barChartDropdown">
+                <li><a class="dropdown-item" href="#">Ver detalles</a></li>
+                <li><a class="dropdown-item" href="#">Exportar datos</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <canvas id="barChart" height="250"></canvas>
         </div>
       </div>
     </div>
