@@ -34,7 +34,8 @@
     </ul>
   </div>
  <!-- contenido listar funcionarios -->
- <div class="container mt-4 rounded p-4 shadow-sm">
+ <!-- contenido listar funcionarios -->
+<div class="container mt-4 rounded p-4 shadow-sm">
   <h2 class="mb-4 text-center text-primary">Lista de Funcionarios</h2>
 
   <div class="mb-3">
@@ -58,6 +59,7 @@
               <th>Identificación</th>
               <th>Cargo</th>
               <th>Email</th>
+              <th>Imagen</th>
               <th>Estado</th>
             </tr>
           </thead>
@@ -67,13 +69,33 @@
               <td>{{ funcionario.apellido_funcionario }}</td>
               <td>{{ funcionario.identificacion }}</td>
               <td>{{ funcionario.cargo }}</td>
-              <td>{{ funcionario.imagen_url }}</td>
+              <td>{{ funcionario.email }}</td>
               <td>
-                <span 
-                  class="badge" 
+                <img
+                  *ngIf="imagenes[funcionario.id]; else sinImagen"
+                  [src]="imagenes[funcionario.id]"
+                  alt="Imagen de {{ funcionario.nombre_funcionario }}"
+                  width="60"
+                  height="60"
+                  class="rounded-circle border"
+                  style="object-fit: cover;"
+                />
+                <ng-template #sinImagen>
+                  <img                
+                    alt="Sin imagen"
+                    width="60"
+                    height="60"
+                    class="rounded-circle border"
+                    style="object-fit: cover;"
+                  />
+                </ng-template>
+              </td>
+              <td>
+                <span
+                  class="badge"
                   [ngClass]="{
-                    'bg-success': funcionario.estado === 'activo',
-                    'bg-secondary': funcionario.estado !== 'activo'
+                    'bg-success': funcionario.estado.toLowerCase() === 'activo',
+                    'bg-secondary': funcionario.estado.toLowerCase() !== 'activo'
                   }">
                   {{ funcionario.estado }}
                 </span>

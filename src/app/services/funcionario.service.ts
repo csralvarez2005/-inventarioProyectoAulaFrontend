@@ -104,4 +104,21 @@ constructor(private http: HttpClient) {}
     // Aquí puedes personalizar el manejo de errores, como mostrar un mensaje en la interfaz de usuario
     throw error;
   }
+  // Genera una URL para mostrar una imagen ya subida
+ // Método para obtener la URL de la imagen con los headers
+// Método para obtener la imagen desde el backend (requiere autenticación con token)
+getImagenUrl(nombreArchivo: string): Observable<Blob> {
+  const headers = this.getAuthHeaders(); // Utiliza el método para obtener los headers con el token
+  
+  // Asegúrate de que la URL se construya correctamente
+  const url = `http://localhost:8080/uploads/${nombreArchivo}`;
+  
+  return this.http.get<Blob>(url, {
+    headers,
+    responseType: 'blob' as 'json' // Asegúrate de que el tipo de respuesta sea blob
+  }).pipe(
+    catchError(this.handleError)
+  );
+}
+
 }

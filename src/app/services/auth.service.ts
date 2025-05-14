@@ -118,18 +118,20 @@ export class AuthService {
   // Verificar si el usuario está logueado
   isLoggedIn(): boolean { 
     return !!this.getToken() && !this.isTokenExpired();
-  } getFuncionarioActual(): Observable<Funcionario> {
-    // Obtener el token de localStorage
-    const token = localStorage.getItem('token');
+  } 
+getFuncionarioActual(): Observable<Funcionario> {
+  // Usar el método centralizado para obtener el token
+  const token = this.getToken();
 
-    // Crear las cabeceras HTTP con el token de autenticación
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+  // Crear las cabeceras HTTP con el token de autenticación
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
 
-    // Realizar la solicitud para obtener el perfil del funcionario
-    return this.http.get<Funcionario>(`${this.apiUrl}/api/funcionarios/perfil`, { headers });
-  }
+  // Realizar la solicitud para obtener el perfil del funcionario
+  return this.http.get<Funcionario>(`${this.apiUrl}/api/funcionarios/perfil`, { headers });
+}
+
 }
 
 
